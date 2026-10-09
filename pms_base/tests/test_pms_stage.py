@@ -41,6 +41,18 @@ class TestPmsStage(PmsBaseCase):
         with self.assertRaises(ValidationError):
             self._make_stage("Short Color", color="#FFF")
 
+    def test_empty_color(self):
+        """A stage without color passes the constraint."""
+        stage = self._make_stage("No Color", color=False)
+        self.assertFalse(stage.custom_color)
+
+    def test_hex_color_several_stages(self):
+        """The constraint checks each stage of a batch."""
+        stages = self._make_stage("Batch 1") | self._make_stage("Batch 2")
+        stages.write({"custom_color": "#000000"})
+        with self.assertRaises(ValidationError):
+            stages.write({"custom_color": "000000"})
+
     def test_default_stage_flag(self):
         """is_default can be set and is used by _default_stages."""
         stage = self._make_stage("Default Stage", is_default=True)

@@ -43,11 +43,9 @@ class PMSStage(models.Model):
 
     @api.constrains("custom_color")
     def _check_custom_color_hex_code(self):
-        if (
-            self.custom_color
-            and not self.custom_color.startswith("#")
-            or len(self.custom_color) != 7
-        ):
-            raise ValidationError(
-                self.env._("Color code should be Hex Code. Ex:-#FFFFFF")
-            )
+        for stage in self:
+            color = stage.custom_color
+            if color and (not color.startswith("#") or len(color) != 7):
+                raise ValidationError(
+                    self.env._("Color code should be Hex Code. Ex:-#FFFFFF")
+                )
