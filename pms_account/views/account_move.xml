@@ -10,7 +10,7 @@
                     type="object"
                     class="oe_stat_button"
                     icon="map"
-                    invisible="('property_count', '=', 0)"
+                    invisible="property_count == 0"
                     groups="pms_base.group_pms_user"
                 >
                     <field

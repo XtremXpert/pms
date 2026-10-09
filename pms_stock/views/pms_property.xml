@@ -31,7 +31,7 @@
                     name="%(pms_stock.location_open_content)d"
                     context="{'stock_location_id': stock_location_id}"
                     type="action"
-                    invisible="('stock_location_id', '=', False)"
+                    invisible="not stock_location_id"
                 />
             </xpath>
         </field>
