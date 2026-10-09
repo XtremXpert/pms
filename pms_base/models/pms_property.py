@@ -2,9 +2,9 @@
 # Copyright 2019  Dario Lodeiros
 # Copyright (c) 2021 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import pytz
-
 from odoo import api, fields, models
+
+from odoo.addons.base.models.res_partner import _tz_get
 
 
 class PmsProperty(models.Model):
@@ -72,7 +72,7 @@ class PmsProperty(models.Model):
         help="This field is used to determine the timezone of the property.",
         required=True,
         default=lambda self: self.env.user.tz or "UTC",
-        selection=lambda self: [(tz, tz) for tz in pytz.all_timezones],
+        selection=_tz_get,
     )
     area = fields.Float()
     heating = fields.Selection(
