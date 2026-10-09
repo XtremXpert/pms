@@ -27,7 +27,7 @@
                 <button
                     string="Content"
                     class="oe_stat_button"
-                    icon="view_in_ar"
+                    icon="inventory_2"
                     name="%(pms_stock.location_open_content)d"
                     context="{'stock_location_id': stock_location_id}"
                     type="action"

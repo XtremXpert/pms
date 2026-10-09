@@ -8,7 +8,7 @@
                 <button
                     name="action_view_properties"
                     type="object"
-                    icon="list"
+                    icon="format_list_bulleted"
                     class="oe_stat_button"
                     groups="pms_base.group_pms_user"
                 >

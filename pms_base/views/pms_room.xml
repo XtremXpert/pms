@@ -63,7 +63,7 @@
                         name="type_id"
                         string="Room Types"
                         enable_counters="True"
-                        icon="hotel"
+                        icon="bed"
                         color="#784f73"
                     />
                 </searchpanel>
