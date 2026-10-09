@@ -23,8 +23,7 @@ class PmsProperty(models.Model):
         return {
             "name": self.env._("Purchase Order Lines"),
             "view_mode": "list",
-            "views": [(False, "list")],  # requis par Odoo 20
-            "view_id": view_id,
+            "views": [(view_id, "list")],
             "res_model": "purchase.order.line",
             "domain": [("id", "in", self.po_line_ids.ids)],
             "type": "ir.actions.act_window",

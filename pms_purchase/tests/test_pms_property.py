@@ -80,7 +80,12 @@ class TestPmsProperty(common.TransactionCase):
         purchase_order.order_line._onchange_pms_property_id()
 
         pms_property_record._compute_po_line_count()
-        pms_property_record.action_open_po_line()
+        action = pms_property_record.action_open_po_line()
+        self.assertEqual(
+            action["views"],
+            [(self.env.ref("purchase.purchase_order_line_tree").id, "list")],
+        )
+        self.assertEqual(action["domain"], [("id", "in", purchase_order.order_line.ids)])
 
         self.env["stock.putaway.rule"].create(
             {
