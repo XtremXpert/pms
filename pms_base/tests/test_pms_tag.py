@@ -45,7 +45,7 @@ class TestPmsTag(PmsBaseCase):
 
     def test_tag_assigned_to_property(self):
         """A tag can be assigned to a property via tag_ids."""
-        tag = self.env["pms.tag"].create({"name": "Premium"})
+        tag = self.env["pms.tag"].create({"name": "Premium Test Tag"})
         self.property.write({"tag_ids": [tag.id]})
         self.assertIn(tag, self.property.tag_ids)
 

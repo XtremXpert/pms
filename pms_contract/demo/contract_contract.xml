@@ -10,11 +10,11 @@
                 <field name="price_unit">120.0</field>
                 <field
                     name="date_start"
-                    eval="(datetime.datetime.now()).strftime('%Y-%m-%d')"
+                    eval="time.strftime('%Y-%m-%d')"
                 />
                 <field
                     name="recurring_next_date"
-                    eval="(datetime.datetime.now()).strftime('%Y-%m-%d')"
+                    eval="time.strftime('%Y-%m-%d')"
                 />
                 <field name="recurring_rule_type">monthly</field>
                 <field name="property_id" ref="pms_base.demo_property_downtown" />
@@ -33,11 +33,11 @@
                 <field name="price_unit">35.0</field>
                 <field
                     name="date_start"
-                    eval="(datetime.datetime.now()).strftime('%Y-%m-%d')"
+                    eval="time.strftime('%Y-%m-%d')"
                 />
                 <field
                     name="recurring_next_date"
-                    eval="(datetime.datetime.now()).strftime('%Y-%m-%d')"
+                    eval="time.strftime('%Y-%m-%d')"
                 />
                 <field name="recurring_rule_type">monthly</field>
                 <field name="property_id" ref="pms_base.demo_property_suburban" />
