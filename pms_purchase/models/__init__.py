@@ -3,3 +3,4 @@ from . import purchase_order_line
 from . import stock_putaway_rule
 from . import pms_property
 from . import stock_move
+from . import stock_move_line

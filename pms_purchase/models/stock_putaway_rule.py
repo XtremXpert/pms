@@ -23,3 +23,18 @@ class StockPutawayRule(models.Model):
         help="When enabled, incoming stock is routed to the property location "
         "linked on the purchase order line.",
     )
+
+    def _get_putaway_location(
+        self, product, quantity=0, package=None, packaging=None, qty_by_location=None
+    ):
+        # "Store to" is optional for the rules that move the goods to the
+        # property location: they have no location of their own to offer.
+        return super(
+            StockPutawayRule, self.filtered("location_out_id")
+        )._get_putaway_location(
+            product,
+            quantity=quantity,
+            package=package,
+            packaging=packaging,
+            qty_by_location=qty_by_location,
+        )
