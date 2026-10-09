@@ -53,6 +53,24 @@ class TestPmsProperty(PmsBaseCase):
         )
         self.assertIn(prop, results)
 
+    def test_search_display_name_negative(self):
+        """A negative search on display_name excludes by name and by ref."""
+        by_name = self.env["pms.property"].create(
+            {"name": "Excluded Name", "owner_id": self.owner.id, "tz": "UTC"}
+        )
+        by_ref = self.env["pms.property"].create(
+            {
+                "name": "Other",
+                "ref": "EXCL-REF",
+                "owner_id": self.owner.id,
+                "tz": "UTC",
+            }
+        )
+        domain = [("id", "in", (by_name | by_ref | self.property).ids)]
+        Property = self.env["pms.property"]
+        results = Property.search(domain + [("display_name", "not ilike", "Excl")])
+        self.assertEqual(results, self.property)
+
     def test_room_count(self):
         """room_count reflects the number of rooms linked to the property."""
         self.assertEqual(self.property.room_count, 0)

@@ -12,6 +12,7 @@ class PmsProperty(models.Model):
     _description = "Property"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _inherits = {"res.partner": "partner_id"}
+    _rec_names_search = ["name", "ref"]
 
     def _default_team_id(self):
         return self.env.ref("pms_base.pms_team_default", raise_if_not_found=False)
@@ -263,11 +264,3 @@ class PmsProperty(models.Model):
         for rec in self:
             ref_part = f"[{rec.ref}] " if rec.ref else ""
             rec.display_name = f"{ref_part}{rec.name}"
-
-    @api.model
-    def _search_display_name(self, operator, value):
-        if value:
-            return fields.Domain(
-                ["|", ("name", operator, value), ("ref", operator, value)]
-            )
-        return fields.Domain([])
