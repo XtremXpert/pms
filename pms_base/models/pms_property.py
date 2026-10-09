@@ -3,6 +3,7 @@
 # Copyright (c) 2021 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
+from odoo.tools import frozendict
 
 from odoo.addons.base.models.res_partner import _tz_get
 
@@ -10,9 +11,9 @@ from odoo.addons.base.models.res_partner import _tz_get
 class PmsProperty(models.Model):
     _name = "pms.property"
     _description = "Property"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
-    _inherits = {"res.partner": "partner_id"}
-    _rec_names_search = ["name", "ref"]
+    _inherit = ("mail.thread", "mail.activity.mixin")
+    _inherits = frozendict({"res.partner": "partner_id"})
+    _rec_names_search = ("name", "ref")
 
     def _default_team_id(self):
         return self.env.ref("pms_base.pms_team_default", raise_if_not_found=False)
@@ -25,7 +26,6 @@ class PmsProperty(models.Model):
         ondelete="cascade",
     )
     owner_id = fields.Many2one(
-        string="Owner",
         help="The owner of the property.",
         comodel_name="res.partner",
         required=True,
@@ -34,10 +34,8 @@ class PmsProperty(models.Model):
     property_child_ids = fields.One2many(
         "pms.property", "parent_id", string="Children Property"
     )
-    company_id = fields.Many2one(string="Company", comodel_name="res.company")
-    team_id = fields.Many2one(
-        "pms.team", string="Team", default=lambda self: self._default_team_id()
-    )
+    company_id = fields.Many2one(comodel_name="res.company")
+    team_id = fields.Many2one("pms.team", default=lambda self: self._default_team_id())
     room_ids = fields.One2many(
         string="Rooms",
         help="List of rooms in the property.",

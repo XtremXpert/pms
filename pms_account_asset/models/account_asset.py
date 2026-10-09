@@ -10,5 +10,4 @@ class AccountAsset(models.Model):
 
     property_id = fields.Many2one(
         "pms.property",
-        string="Property",
     )

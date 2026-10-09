@@ -30,22 +30,28 @@ class PmsProperty(models.Model):
         parent = self.env.ref("stock.stock_location_stock", raise_if_not_found=False)
         if not parent:
             return
-        parent = parent.sudo()  # l'utilisateur peut ne pas voir l'emplacement d'une autre société
-        # Odoo 20 refuse un emplacement dont la société diffère de celle de son
-        # parent : si la propriété est d'une autre société, prendre l'entrepôt
-        # de cette société.
+        # The user may not see the stock location of another company.
+        parent = parent.sudo()
+        # Odoo 20 rejects a location whose company differs from its parent's:
+        # for a property of another company, use that company's warehouse.
         company = self.company_id or self.env.company
         if parent.company_id and parent.company_id != company:
-            warehouse = self.env["stock.warehouse"].sudo().search(
-                [("company_id", "=", company.id)], limit=1
+            warehouse = (
+                self.env["stock.warehouse"]
+                .sudo()
+                .search([("company_id", "=", company.id)], limit=1)
             )
             parent = warehouse.lot_stock_id or parent
-        location = self.env["stock.location"].sudo().create(
-            {
-                "name": self.name,
-                "location_id": parent.id,
-                "usage": "internal",
-                "company_id": parent.company_id.id,
-            }
+        location = (
+            self.env["stock.location"]
+            .sudo()
+            .create(
+                {
+                    "name": self.name,
+                    "location_id": parent.id,
+                    "usage": "internal",
+                    "company_id": parent.company_id.id,
+                }
+            )
         )
         self.stock_location_id = location.id

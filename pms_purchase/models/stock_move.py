@@ -23,9 +23,8 @@ class StockMove(models.Model):
         rules = self.location_dest_id.putaway_rule_ids
         rule = rules.filtered(lambda r: r.product_id == self.product_id)[:1]
         if not rule:
-            rule = rules.filtered(
-                lambda r: r.category_id == self.product_id.categ_id
-            )[:1]
+            categ = self.product_id.categ_id
+            rule = rules.filtered(lambda r: r.category_id == categ)[:1]
         if not rule.move_to_property:
             return no_location
         po = self.picking_id.purchase_id or line.order_id

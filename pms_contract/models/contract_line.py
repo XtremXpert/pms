@@ -10,7 +10,6 @@ class ContractLine(models.Model):
 
     property_id = fields.Many2one(
         "pms.property",
-        string="Property",
     )
 
     def _prepare_invoice_line(self, **kwargs):

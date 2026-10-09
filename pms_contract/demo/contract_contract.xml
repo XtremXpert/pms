@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="demo_contract_downtown" model="contract.contract">
         <field name="name">Downtown Apartment – Annual Maintenance</field>
@@ -8,14 +9,8 @@
                 <field name="product_id" ref="pms_base.demo_product_cleaning" />
                 <field name="quantity">1.0</field>
                 <field name="price_unit">120.0</field>
-                <field
-                    name="date_start"
-                    eval="time.strftime('%Y-%m-%d')"
-                />
-                <field
-                    name="recurring_next_date"
-                    eval="time.strftime('%Y-%m-%d')"
-                />
+                <field name="date_start" eval="time.strftime('%Y-%m-%d')" />
+                <field name="recurring_next_date" eval="time.strftime('%Y-%m-%d')" />
                 <field name="recurring_rule_type">monthly</field>
                 <field name="property_id" ref="pms_base.demo_property_downtown" />
             </record>
@@ -31,14 +26,8 @@
                 <field name="product_id" ref="pms_base.demo_product_laundry" />
                 <field name="quantity">1.0</field>
                 <field name="price_unit">35.0</field>
-                <field
-                    name="date_start"
-                    eval="time.strftime('%Y-%m-%d')"
-                />
-                <field
-                    name="recurring_next_date"
-                    eval="time.strftime('%Y-%m-%d')"
-                />
+                <field name="date_start" eval="time.strftime('%Y-%m-%d')" />
+                <field name="recurring_next_date" eval="time.strftime('%Y-%m-%d')" />
                 <field name="recurring_rule_type">monthly</field>
                 <field name="property_id" ref="pms_base.demo_property_suburban" />
             </record>

@@ -27,7 +27,6 @@ class PMSStage(models.Model):
     description = fields.Text(translate=True)
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=False,
         index=True,
         default=lambda self: self.env.company.id,

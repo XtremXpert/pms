@@ -10,6 +10,5 @@ class PmsService(models.Model):
 
     contract_id = fields.Many2one(
         "contract.contract",
-        string="Contract",
         copy=False,
     )

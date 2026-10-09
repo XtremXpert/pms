@@ -38,25 +38,31 @@ class TestPmsService(PmsBaseCase):
 
     def test_vendor_required(self):
         """Creating a service without vendor_id raises an error."""
-        with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
-            with self.env.cr.savepoint():
-                self.env["pms.service"].create(
-                    {
-                        "name": self.product.id,
-                        "property_id": self.property.id,
-                    }
-                )
+        with (
+            mute_logger("odoo.sql_db"),
+            self.assertRaises(IntegrityError),
+            self.env.cr.savepoint(),
+        ):
+            self.env["pms.service"].create(
+                {
+                    "name": self.product.id,
+                    "property_id": self.property.id,
+                }
+            )
 
     def test_product_required(self):
         """Creating a service without name (product) raises an error."""
-        with mute_logger("odoo.sql_db"), self.assertRaises(IntegrityError):
-            with self.env.cr.savepoint():
-                self.env["pms.service"].create(
-                    {
-                        "property_id": self.property.id,
-                        "vendor_id": self.vendor.id,
-                    }
-                )
+        with (
+            mute_logger("odoo.sql_db"),
+            self.assertRaises(IntegrityError),
+            self.env.cr.savepoint(),
+        ):
+            self.env["pms.service"].create(
+                {
+                    "property_id": self.property.id,
+                    "vendor_id": self.vendor.id,
+                }
+            )
 
     def test_archive_service(self):
         """A service can be archived (active=False)."""

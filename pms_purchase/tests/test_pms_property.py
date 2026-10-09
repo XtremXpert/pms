@@ -85,7 +85,9 @@ class TestPmsProperty(common.TransactionCase):
             action["views"],
             [(self.env.ref("purchase.purchase_order_line_tree").id, "list")],
         )
-        self.assertEqual(action["domain"], [("id", "in", purchase_order.order_line.ids)])
+        self.assertEqual(
+            action["domain"], [("id", "in", purchase_order.order_line.ids)]
+        )
 
         self.env["stock.putaway.rule"].create(
             {
