@@ -1,0 +1,4 @@
+odoo-addon-account_asset_management @ git+https://github.com/XtremXpert/account-financial-tools.git@20.0-mig-mac#subdirectory=account_asset_management
+odoo-addon-contract @ git+https://github.com/XtremXpert/contract.git@20.0-mig-mac#subdirectory=contract
+odoo-addon-report_xlsx @ git+https://github.com/XtremXpert/reporting-engine.git@20.0-mig-mac#subdirectory=report_xlsx
+odoo-addon-report_xlsx_helper @ git+https://github.com/XtremXpert/reporting-engine.git@20.0-mig-mac#subdirectory=report_xlsx_helper
