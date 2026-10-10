@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+        id="menu_assets"
+        name="Assets"
+        parent="pms_base.menu_operations"
+        sequence="30"
+        action="account_asset_management.account_asset_action"
+    />
+</odoo>
